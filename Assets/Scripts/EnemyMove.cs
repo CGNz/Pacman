@@ -11,13 +11,14 @@ public class EnemyMove : MonoBehaviour {
     //当前在前往哪个路径点
     private int index = 0;
 
+    private Vector3 startPos;
+
     private void Start()
     {
-        //foreach (Transform t in wayPointsGo[Random.Range(0,3)].transform)
-        //{
-        //    wayPoints.Add(t.position);
-        //}
-        LoadAPath(wayPointsGo[Random.Range(0,wayPointsGo.Length)]);
+        startPos = transform.position + new Vector3(0, 3, 0);
+        
+        //加载路径
+        LoadAPath(wayPointsGo[GameManager.Instance.usingIndex[GetComponent<SpriteRenderer>().sortingOrder-2]]);
 
     }
 
@@ -49,6 +50,8 @@ public class EnemyMove : MonoBehaviour {
         {
             wayPoints.Add(t.position);
         }
+        wayPoints.Insert(0, startPos);
+        wayPoints.Add(startPos);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
