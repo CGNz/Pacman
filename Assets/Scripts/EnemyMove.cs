@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMove : MonoBehaviour {
     //路径条数
@@ -62,12 +63,27 @@ public class EnemyMove : MonoBehaviour {
             {
                 transform.position = startPos - new Vector3(0, 3, 0);
                 index = 0;
+                //吃鬼加500分
+                GameManager.Instance.score += 500;
             } else
             {
-                Destroy(collision.gameObject);
+                //新死亡，将角色隐藏
+                collision.gameObject.SetActive(false);
+                GameManager.Instance.gamePanel.SetActive(false);
+                Instantiate(GameManager.Instance.gameoverPrefab);
+
+                //看三秒后重载场景
+                Invoke("Restart", 3f);
+
+                //旧死亡
+                //Destroy(collision.gameObject);
             }
            
         }
     }
 
+    private void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
