@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour {
         //胜利之后按任意键重新加载场景
         if (nowEat == pacdotNum)
         {
-            if (Input.anyKeyDown)
+            if (Input.anyKeyDown)       
             {
                 SceneManager.LoadScene(0);
             }
