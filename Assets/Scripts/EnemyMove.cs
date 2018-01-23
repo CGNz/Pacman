@@ -58,7 +58,15 @@ public class EnemyMove : MonoBehaviour {
     {
         if (collision.gameObject.name == "Pacman")
         {
-            Destroy(collision.gameObject);
+            if (GameManager.Instance.isSuperPacman)
+            {
+                transform.position = startPos - new Vector3(0, 3, 0);
+                index = 0;
+            } else
+            {
+                Destroy(collision.gameObject);
+            }
+           
         }
     }
 
