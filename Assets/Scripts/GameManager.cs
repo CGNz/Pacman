@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
         _instance = this;
+        Screen.SetResolution(1024, 768, false);
         int tempCount = rawIndex.Count;
         for (int i=0; i<tempCount; i++)
         {
